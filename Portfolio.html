@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Shadow Furniture | Portfolio — Our Best Work</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --cream: #F5F0E8;
+            --cream2: #EDE7D9;
+            --cream3: #DDD5C5;
+            --forest: #1C3528;
+            --forest2: #2A4A3A;
+            --forest3: #3B6151;
+            --forestd: #0E2019;
+            --brass: #C9A84C;
+            --brass2: #DFBF6E;
+            --brass3: #EDD08A;
+            --muted: #6B6660;
+            --white: #fff;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1)
+        }
+
+        body {
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream2)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--forest3);
+            border-radius: 3px
+        }
+
+        /* Navigation - Same as Home Page */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 86px;
+            background: rgba(245, 240, 232, 0.94);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(28, 53, 40, 0.09);
+            transition: height 0.35s var(--ease), box-shadow 0.35s
+        }
+
+        nav.scrolled {
+            height: 68px;
+            box-shadow: 0 4px 32px rgba(28, 53, 40, 0.08)
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none
+        }
+
+        .logo-img {
+            height: 95px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 38px;
+            list-style: none
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.2s;
+            text-decoration: none
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--brass);
+            transition: width 0.3s var(--ease)
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--forest)
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%
+        }
+
+        .nav-cta {
+            padding: 11px 26px;
+            background: var(--forest);
+            color: var(--cream);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            transition: all 0.25s;
+            text-decoration: none
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--forest);
+            border-color: var(--forest)
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--forest);
+            transition: all 0.3s
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg)
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg)
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 86px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: var(--cream);
+            padding: 28px 6%;
+            flex-direction: column;
+            gap: 0;
+            border-bottom: 1px solid rgba(28, 53, 40, 0.1);
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s
+        }
+
+        .mobile-nav.open {
+            display: flex;
+            opacity: 1;
+            transform: none
+        }
+
+        .mobile-nav a {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--forest);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(28, 53, 40, 0.08);
+            text-decoration: none
+        }
+
+        .mobile-nav a:last-child {
+            border-bottom: none
+        }
+
+        .mobile-nav a:hover {
+            color: var(--brass)
+        }
+
+        /* Page Hero */
+        .page-hero {
+            height: 45vh;
+            background: linear-gradient(rgba(28, 53, 40, 0.65), rgba(28, 53, 40, 0.65)), url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&h=600&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--cream);
+            margin-top: 86px
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(38px, 5vw, 64px);
+            font-weight: 500;
+            margin-bottom: 15px
+        }
+
+        .page-hero p {
+            font-size: 16px;
+            opacity: 0.9
+        }
+
+        /* Filters */
+        .filters {
+            padding: 50px 5% 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap
+        }
+
+        .filter-btn {
+            padding: 10px 28px;
+            background: transparent;
+            border: 1px solid var(--forest);
+            color: var(--forest);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 30px
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--forest);
+            color: var(--cream)
+        }
+
+        /* Portfolio Grid */
+        .portfolio-section {
+            padding: 0 5% 80px
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--white);
+            border-radius: 2px;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1)
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05)
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(28, 53, 40, 0.95));
+            padding: 25px;
+            transition: bottom 0.4s var(--ease);
+            color: var(--cream)
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            bottom: 0
+        }
+
+        .portfolio-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-weight: 500
+        }
+
+        .portfolio-overlay p {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 8px
+        }
+
+        .portfolio-overlay span {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: rgba(255, 255, 255, 0.6)
+        }
+
+        .portfolio-overlay span i {
+            color: var(--brass);
+            font-size: 11px
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--forest);
+            padding: 80px 5%;
+            text-align: center;
+            color: var(--cream)
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 3.5vw, 42px);
+            margin-bottom: 20px
+        }
+
+        .btn-forest {
+            padding: 15px 38px;
+            background: var(--brass);
+            color: var(--forest);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.25s, transform 0.2s;
+            text-decoration: none
+        }
+
+        .btn-forest:hover {
+            background: var(--brass2);
+            transform: translateY(-2px)
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease)
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        .d1 {
+            transition-delay: 0.1s
+        }
+
+        .d2 {
+            transition-delay: 0.2s
+        }
+
+        .d3 {
+            transition-delay: 0.3s
+        }
+
+        /* Footer - Same as Home Page */
+        footer {
+            padding: 72px 5% 32px;
+            background: var(--forestd)
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1fr 1fr;
+            gap: 56px;
+            margin-bottom: 56px
+        }
+
+        .footer-logo img {
+            height: 130px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+            color: rgba(245, 240, 232, 0.5);
+            font-size: 13px;
+            line-height: 1.85;
+            margin: 18px 0 24px;
+            max-width: 270px
+        }
+
+        .socials {
+            display: flex;
+            gap: 11px
+        }
+
+        .socials a {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(245, 240, 232, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(245, 240, 232, 0.4);
+            font-size: 14px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none
+        }
+
+        .socials a:hover {
+            border-color: var(--brass);
+            color: var(--brass)
+        }
+
+        .fc h4 {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 22px
+        }
+
+        .fc ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px
+        }
+
+        .fc a {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.45);
+            transition: color 0.2s;
+            text-decoration: none
+        }
+
+        .fc a:hover {
+            color: var(--cream)
+        }
+
+        .fc span {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.45)
+        }
+
+        .footer-bottom {
+            padding-top: 28px;
+            border-top: 1px solid rgba(245, 240, 232, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: rgba(245, 240, 232, 0.28)
+        }
+
+        /* Scroll to Top Button */
+        #scrolltop {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 500;
+            width: 44px;
+            height: 44px;
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #scrolltop.show {
+            opacity: 1;
+            transform: none;
+            pointer-events: all
+        }
+
+        #scrolltop:hover {
+            background: var(--forest2)
+        }
+
+        /* Responsive */
+        @media(max-width:1100px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:768px) {
+            nav {
+                padding: 0 5%;
+                height: 70px
+            }
+
+            .nav-links,
+            .nav-cta {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            .mobile-nav {
+                top: 70px
+            }
+
+            .page-hero {
+                margin-top: 70px;
+                height: 35vh
+            }
+
+            .filters {
+                padding: 40px 5% 20px
+            }
+
+            .portfolio-section {
+                padding: 0 5% 60px
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr
+            }
+
+            .portfolio-item img {
+                height: 300px
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .footer-logo img {
+                height: 40px;
+            }
+
+            #scrolltop {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media(max-width:480px) {
+            .filter-btn {
+                padding: 6px 18px;
+                font-size: 10px
+            }
+
+            .portfolio-overlay {
+                padding: 18px
+            }
+
+            .portfolio-overlay h3 {
+                font-size: 18px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR (Same as Home Page) -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">
+            <img src="Assets/Shadow-furniture.png" alt="Shadow Furniture" class="logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html" class="active">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Start Project</a>
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <section class="page-hero">
+        <div>
+            <h1>Our Portfolio</h1>
+            <p>A showcase of our finest work — residential, corporate & hospitality</p>
+        </div>
+    </section>
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="residential">Residential</button>
+        <button class="filter-btn" data-filter="corporate">Corporate / Office</button>
+        <button class="filter-btn" data-filter="hospitality">Hospitality</button>
+    </div>
+
+    <section class="portfolio-section">
+        <div class="portfolio-grid" id="portfolioGrid">
+            <div class="portfolio-item reveal d1" data-category="residential">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=450&fit=crop"
+                    alt="Mathur Residence">
+                <div class="portfolio-overlay">
+                    <h3>The Mathur Residence</h3>
+                    <p>Residential · Living Room</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Kanpur</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d2" data-category="corporate">
+                <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?w=600&h=450&fit=crop"
+                    alt="Executive Suite">
+                <div class="portfolio-overlay">
+                    <h3>Executive Suite Refit</h3>
+                    <p>Corporate · Director Office</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Noida</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d3" data-category="residential">
+                <img src="https://images.unsplash.com/photo-1615874694520-474822394e73?w=600&h=450&fit=crop"
+                    alt="Master Bedroom">
+                <div class="portfolio-overlay">
+                    <h3>Master Bedroom Suite</h3>
+                    <p>Residential · Bedroom</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Kanpur</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d1" data-category="residential">
+                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&h=450&fit=crop"
+                    alt="Home Library">
+                <div class="portfolio-overlay">
+                    <h3>Floor-to-Ceiling Library</h3>
+                    <p>Residential · Study</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Delhi</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d2" data-category="hospitality">
+                <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop"
+                    alt="Restaurant">
+                <div class="portfolio-overlay">
+                    <h3>Restaurant Table Collection</h3>
+                    <p>Hospitality · Dining</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d3" data-category="corporate">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=450&fit=crop"
+                    alt="Boardroom">
+                <div class="portfolio-overlay">
+                    <h3>Boardroom Transformation</h3>
+                    <p>Corporate · Conference</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Gurgaon</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d1" data-category="residential">
+                <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&h=450&fit=crop"
+                    alt="Dining Room">
+                <div class="portfolio-overlay">
+                    <h3>Walnut Dining Set</h3>
+                    <p>Residential · Dining Room</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Kanpur</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d2" data-category="hospitality">
+                <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600&h=450&fit=crop"
+                    alt="Hotel Lobby">
+                <div class="portfolio-overlay">
+                    <h3>Hotel Lobby Furniture</h3>
+                    <p>Hospitality · Lobby</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Jaipur</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d3" data-category="residential">
+                <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=450&fit=crop"
+                    alt="Home Office">
+                <div class="portfolio-overlay">
+                    <h3>Home Office Setup</h3>
+                    <p>Residential · Home Office</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Bangalore</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d1" data-category="corporate">
+                <img src="https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600&h=450&fit=crop"
+                    alt="Reception">
+                <div class="portfolio-overlay">
+                    <h3>Corporate Reception</h3>
+                    <p>Corporate · Reception Area</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Pune</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d2" data-category="residential">
+                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&h=450&fit=crop"
+                    alt="Outdoor">
+                <div class="portfolio-overlay">
+                    <h3>Outdoor Teak Collection</h3>
+                    <p>Residential · Patio</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Goa</span>
+                </div>
+            </div>
+            <div class="portfolio-item reveal d3" data-category="hospitality">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=450&fit=crop" alt="Cafe">
+                <div class="portfolio-overlay">
+                    <h3>Cafe Furniture Line</h3>
+                    <p>Hospitality · Cafe</p>
+                    <span><i class="fas fa-map-marker-alt"></i> Kanpur</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Love what you see? Let's create something for you.</h2>
+        <p style="margin-bottom:25px;opacity:0.8;">Every project begins with a conversation — no obligation, just ideas.
+        </p>
+        <a href="contact.html" class="btn-forest">Start Your Project <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <!-- FOOTER (Same as Home Page) -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <a href="index.html">
+                    <img src="Assets/ChatGPT_Image_Jun_12__2026__12_48_54_PM-removebg-preview.png" alt="Shadow Furniture">
+                </a>
+                <p>Premium bespoke furniture crafted with precision and passion in Kanpur, India.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="fc">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="fc">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="services.html">Custom Design</a></li>
+                    <li><a href="services.html">Home Furniture</a></li>
+                    <li><a href="services.html">Office Furniture</a></li>
+                    <li><a href="services.html">Restoration</a></li>
+                </ul>
+            </div>
+            <div class="fc">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+917860346828"><i class="fas fa-phone"></i> +91 7860346828</a></li>
+                    <li><a href="mailto:digitalshoaib419@gmail.com"><i class="fas fa-envelope"></i>
+                            digitalshoaib419@gmail.com</a></li>
+                    <li><span><i class="fas fa-map-marker-alt"></i> Kanpur, UP, India</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Shadow Furniture. All Rights Reserved.</p>
+            <p>Crafted with intent · Designed in SHADOW DIGITAL</p>
+        </div>
+    </footer>
+
+    <button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            var m = document.getElementById('mobileNav');
+            var h = document.getElementById('ham');
+            if (m) m.classList.toggle('open');
+            if (h) h.classList.toggle('open');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                document.getElementById('mobileNav').classList.remove('open');
+                document.getElementById('ham').classList.remove('open');
+            });
+        });
+
+        // Scroll effects - navbar and scroll to top
+        window.addEventListener('scroll', function () {
+            var nav = document.getElementById('navbar');
+            var st = document.getElementById('scrolltop');
+            if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+            if (st) st.classList.toggle('show', window.scrollY > 400);
+        });
+
+        // Scroll reveal animation
+        var reveals = document.querySelectorAll('.reveal');
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(function (el) { io.observe(el); });
+
+        // Category filter functionality
+        var btns = document.querySelectorAll('.filter-btn');
+        var items = document.querySelectorAll('.portfolio-item');
+
+        btns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var filter = this.dataset.filter;
+                btns.forEach(function (b) { b.classList.remove('active'); });
+                this.classList.add('active');
+
+                items.forEach(function (item) {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(function () { item.style.opacity = '1'; }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        setTimeout(function () { item.style.display = 'none'; }, 200);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Shadow Furniture | Contact — Let's Build Together</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --cream: #F5F0E8;
+            --cream2: #EDE7D9;
+            --cream3: #DDD5C5;
+            --forest: #1C3528;
+            --forest2: #2A4A3A;
+            --forest3: #3B6151;
+            --forestd: #0E2019;
+            --brass: #C9A84C;
+            --brass2: #DFBF6E;
+            --brass3: #EDD08A;
+            --muted: #6B6660;
+            --white: #fff;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1)
+        }
+
+        body {
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream2)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--forest3);
+            border-radius: 3px
+        }
+
+        /* Navigation - Same as Home Page */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 86px;
+            background: rgba(245, 240, 232, 0.94);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(28, 53, 40, 0.09);
+            transition: height 0.35s var(--ease), box-shadow 0.35s
+        }
+
+        nav.scrolled {
+            height: 68px;
+            box-shadow: 0 4px 32px rgba(28, 53, 40, 0.08)
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none
+        }
+
+        .logo-img {
+            height: 95px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 38px;
+            list-style: none
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.2s;
+            text-decoration: none
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--brass);
+            transition: width 0.3s var(--ease)
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--forest)
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%
+        }
+
+        .nav-cta {
+            padding: 11px 26px;
+            background: var(--forest);
+            color: var(--cream);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            transition: all 0.25s;
+            text-decoration: none
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--forest);
+            border-color: var(--forest)
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--forest);
+            transition: all 0.3s
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg)
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg)
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 86px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: var(--cream);
+            padding: 28px 6%;
+            flex-direction: column;
+            gap: 0;
+            border-bottom: 1px solid rgba(28, 53, 40, 0.1);
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s
+        }
+
+        .mobile-nav.open {
+            display: flex;
+            opacity: 1;
+            transform: none
+        }
+
+        .mobile-nav a {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--forest);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(28, 53, 40, 0.08);
+            text-decoration: none
+        }
+
+        .mobile-nav a:last-child {
+            border-bottom: none
+        }
+
+        .mobile-nav a:hover {
+            color: var(--brass)
+        }
+
+        /* Page Hero */
+        .page-hero {
+            height: 40vh;
+            background: linear-gradient(rgba(28, 53, 40, 0.65), rgba(28, 53, 40, 0.65)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=500&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--cream);
+            margin-top: 86px
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(38px, 5vw, 64px);
+            font-weight: 500;
+            margin-bottom: 15px
+        }
+
+        .page-hero p {
+            font-size: 16px;
+            opacity: 0.9
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 5% 0 5%;
+        }
+
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 80px;
+            align-items: start
+        }
+
+        .section-eyebrow {
+            font-size: 10px;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .section-eyebrow::before {
+            content: '';
+            width: 26px;
+            height: 1px;
+            background: var(--brass)
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(26px, 3vw, 42px);
+            font-weight: 500;
+            color: var(--forest);
+            margin-bottom: 18px
+        }
+
+        .contact-info p {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.9;
+            margin-bottom: 40px
+        }
+
+        .cinfo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 28px
+        }
+
+        .cinfo-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            background: var(--cream2);
+            border: 1px solid rgba(28, 53, 40, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--forest3);
+            transition: background 0.2s
+        }
+
+        .cinfo-item:hover .cinfo-icon {
+            background: var(--brass);
+            color: var(--forest)
+        }
+
+        .cinfo-label {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 4px
+        }
+
+        .cinfo-val {
+            font-size: 15px;
+            color: var(--muted)
+        }
+
+        .cinfo-val a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s
+        }
+
+        .cinfo-val a:hover {
+            color: var(--forest)
+        }
+
+        /* Full Width Map Section */
+        .fullwidth-map {
+            margin-top: 60px;
+            width: 100%;
+            position: relative;
+            left: 0;
+            right: 0;
+        }
+
+        .map-container {
+            width: 100%;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            display: block;
+            border: none;
+        }
+
+        /* Form */
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        .frow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: 7px
+        }
+
+        .fg label {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .fg input,
+        .fg textarea,
+        .fg select {
+            background: var(--white);
+            border: 1px solid rgba(28, 53, 40, 0.14);
+            color: var(--ink);
+            padding: 14px 16px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            outline: none;
+            transition: border-color 0.2s;
+            border-radius: 2px
+        }
+
+        .fg input:focus,
+        .fg textarea:focus,
+        .fg select:focus {
+            border-color: var(--forest)
+        }
+
+        .fg textarea {
+            height: 130px
+        }
+
+        .btn-forest {
+            padding: 15px 38px;
+            background: var(--forest);
+            color: var(--cream);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.25s, transform 0.2s;
+            border-radius: 2px
+        }
+
+        .btn-forest:hover {
+            background: var(--forest2);
+            transform: translateY(-2px)
+        }
+
+        .form-ok {
+            display: none;
+            padding: 20px 22px;
+            background: rgba(28, 53, 40, 0.06);
+            border-left: 3px solid var(--forest3);
+            font-size: 14px;
+            color: var(--forest);
+            margin-top: 6px;
+            border-radius: 2px
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--cream);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--cream2);
+            padding: 100px 5%;
+            margin-top: 0;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 50px
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(28, 53, 40, 0.1);
+            padding-bottom: 20px;
+            margin-bottom: 20px
+        }
+
+        .faq-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--forest);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer
+        }
+
+        .faq-question i {
+            color: var(--brass);
+            transition: transform 0.3s
+        }
+
+        .faq-answer {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 150px;
+            margin-top: 12px
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(45deg)
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease)
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        .d1 {
+            transition-delay: 0.1s
+        }
+
+        .d2 {
+            transition-delay: 0.2s
+        }
+
+        .d3 {
+            transition-delay: 0.3s
+        }
+
+        /* Footer - Same as Home Page */
+        footer {
+            padding: 72px 5% 32px;
+            background: var(--forestd)
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1fr 1fr;
+            gap: 56px;
+            margin-bottom: 56px
+        }
+
+        .footer-logo img {
+            height: 130px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+            color: rgba(245, 240, 232, 0.5);
+            font-size: 13px;
+            line-height: 1.85;
+            margin: 18px 0 24px;
+            max-width: 270px
+        }
+
+        .socials {
+            display: flex;
+            gap: 11px
+        }
+
+        .socials a {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(245, 240, 232, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(245, 240, 232, 0.4);
+            font-size: 14px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none
+        }
+
+        .socials a:hover {
+            border-color: var(--brass);
+            color: var(--brass)
+        }
+
+        .fc h4 {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 22px
+        }
+
+        .fc ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px
+        }
+
+        .fc a {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.45);
+            transition: color 0.2s;
+            text-decoration: none
+        }
+
+        .fc a:hover {
+            color: var(--cream)
+        }
+
+        .fc span {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.45)
+        }
+
+        .footer-bottom {
+            padding-top: 28px;
+            border-top: 1px solid rgba(245, 240, 232, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: rgba(245, 240, 232, 0.28)
+        }
+
+        /* Scroll to Top Button */
+        #scrolltop {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 500;
+            width: 44px;
+            height: 44px;
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #scrolltop.show {
+            opacity: 1;
+            transform: none;
+            pointer-events: all
+        }
+
+        #scrolltop:hover {
+            background: var(--forest2)
+        }
+
+        /* Responsive */
+        @media(max-width:1100px) {
+            .contact-wrap {
+                grid-template-columns: 1fr;
+                gap: 48px
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:768px) {
+            nav {
+                padding: 0 5%;
+                height: 70px
+            }
+
+            .nav-links,
+            .nav-cta {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            .mobile-nav {
+                top: 70px
+            }
+
+            .page-hero {
+                margin-top: 70px;
+                height: 30vh
+            }
+
+            .contact-section {
+                padding: 60px 5% 0 5%;
+            }
+
+            .faq-section {
+                padding: 60px 5%;
+            }
+
+            .frow {
+                grid-template-columns: 1fr
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .footer-logo img {
+                height: 40px;
+            }
+
+            #scrolltop {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .map-container iframe {
+                height: 280px;
+            }
+        }
+
+        @media(max-width:480px) {
+            .cinfo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px
+            }
+
+            .cinfo-val {
+                font-size: 13px
+            }
+
+            .map-container iframe {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR (Same as Home Page) -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">
+            <img src="Assets/Shadow-furniture.png" alt="Shadow Furniture" class="logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Start Project</a>
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <section class="page-hero">
+        <div>
+            <h1>Let's connect</h1>
+            <p>We'd love to hear about your next project</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-wrap">
+            <div class="contact-info">
+                <div class="section-eyebrow reveal">Get in Touch</div>
+                <h2 class="reveal d1">Let's build something<br>together.</h2>
+                <p class="reveal d2">We take on a limited number of projects each season. Reach out early — the
+                    conversation is always free.</p>
+
+                <div class="cinfo-item reveal d3">
+                    <div class="cinfo-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div>
+                        <div class="cinfo-label">Phone</div>
+                        <div class="cinfo-val"><a href="tel:+917860346828">+91 7860346828</a><br><span
+                                style="font-size:12px">Mon-Sat, 10am - 6pm</span></div>
+                    </div>
+                </div>
+
+                <div class="cinfo-item reveal d3">
+                    <div class="cinfo-icon"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <div class="cinfo-label">Email</div>
+                        <div class="cinfo-val"><a
+                                href="mailto:digitalshoaib419@gmail.com">digitalshoaib419@gmail.com</a><br><span
+                                style="font-size:12px">Response within 24 hours</span></div>
+                    </div>
+                </div>
+
+                <div class="cinfo-item reveal d3">
+                    <div class="cinfo-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <div class="cinfo-label">Location</div>
+                        <div class="cinfo-val"><span>Digital Shoaib, New Idgah Colony, Benajhabar, Permat, Kanpur, Uttar
+                                Pradesh 208002, India</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <form class="form" id="cform" onsubmit="sendToWhatsApp(event)">
+                    <div class="frow">
+                        <div class="fg"><label>Your Name</label><input type="text" id="userName"
+                                placeholder="Rahul Sharma" required>
+                        </div>
+                        <div class="fg"><label>Phone / Email</label><input type="text" id="userContact"
+                                placeholder="+91 98... or email" required></div>
+                    </div>
+                    <div class="fg">
+                        <label>Type of Project</label>
+                        <select id="projectType">
+                            <option>Select a service...</option>
+                            <option>Custom Furniture Design</option>
+                            <option>Home Furniture</option>
+                            <option>Office Furniture</option>
+                            <option>Interior Furniture Solutions</option>
+                            <option>Furniture Repair & Restoration</option>
+                            <option>Furniture Installation</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label>Budget Range (₹)</label>
+                        <select id="budget">
+                            <option>Select a range...</option>
+                            <option>Under ₹50,000</option>
+                            <option>₹50,000 – ₹1,50,000</option>
+                            <option>₹1,50,000 – ₹5,00,000</option>
+                            <option>₹5,00,000 – ₹10,00,000</option>
+                            <option>₹10,00,000+</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label>Tell Us About Your Space</label>
+                        <textarea id="message"
+                            placeholder="Room dimensions, style references, timeline, anything helpful..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-forest" id="submitBtn">
+                        Send Message <i class="fas fa-arrow-right"></i>
+                        <span class="loading-spinner" id="loadingSpinner"></span>
+                    </button>
+                </form>
+                <div class="form-ok" id="formOk"><i class="fas fa-check-circle" style="margin-right:8px;"></i> Message
+                    sent! We'll be in touch within 24 hours.</div>
+            </div>
+        </div>
+
+        <!-- FULL WIDTH MAP - Outside the grid, takes entire background width -->
+        <div class="fullwidth-map reveal d4">
+            <div class="map-container">
+                <iframe
+                    src="https://maps.google.com/maps?q=Digital%20Shoaib%2C%20New%20Idgah%20Colony%2C%20Benajhabar%2C%20Permat%2C%20Kanpur%2C%20Uttar%20Pradesh%20208002%2C%20India&t=&z=17&ie=UTF8&iwloc=B&output=embed"
+                    allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-eyebrow reveal" style="justify-content:center">FAQs</div>
+        <h2
+            style="text-align:center;font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,38px);margin-top:10px;">
+            Common questions, answered</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">How long does a custom piece take? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Typical lead time is 6-8 weeks from design approval to delivery. Complex
+                    projects may take 10-12 weeks. We'll provide a clear timeline upfront.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Do you deliver pan-India? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Yes! We deliver across India with professional packaging and white-glove
+                    installation in major cities.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What materials do you use? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Only solid hardwoods — teak, sheesham, walnut, oak. No MDF or particle board.
+                    All finishes are premium and eco-friendly.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I see a sample before ordering? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Absolutely. We can send wood and fabric samples to your address or schedule a
+                    visit to our Lucknow workshop.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Same as Home Page) -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <a href="index.html">
+                    <img src="Assets/ChatGPT_Image_Jun_12__2026__12_48_54_PM-removebg-preview.png"
+                        alt="Shadow Furniture">
+                </a>
+                <p>Premium bespoke furniture crafted with precision and passion in Lucknow, India.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="fc">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="fc">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="services.html">Custom Design</a></li>
+                    <li><a href="services.html">Home Furniture</a></li>
+                    <li><a href="services.html">Office Furniture</a></li>
+                    <li><a href="services.html">Restoration</a></li>
+                </ul>
+            </div>
+            <div class="fc">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+917860346828"><i class="fas fa-phone"></i> +91 7860346828</a></li>
+                    <li><a href="mailto:digitalshoaib419@gmail.com"><i class="fas fa-envelope"></i>
+                            digitalshoaib419@gmail.com</a></li>
+                    <li><span><i class="fas fa-map-marker-alt"></i> Digital Shoaib, New Idgah Colony, Benajhabar,
+                            Permat, Kanpur, UP, India</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Shadow Furniture. All Rights Reserved.</p>
+            <p>Crafted with intent · Designed in SHADOW DIGITAL</p>
+        </div>
+    </footer>
+
+    <button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // WhatsApp Number (change to your number)
+        const WHATSAPP_NUMBER = "917860346828"; // without + or spaces
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            var m = document.getElementById('mobileNav');
+            var h = document.getElementById('ham');
+            if (m) m.classList.toggle('open');
+            if (h) h.classList.toggle('open');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                document.getElementById('mobileNav').classList.remove('open');
+                document.getElementById('ham').classList.remove('open');
+            });
+        });
+
+        // Scroll effects
+        window.addEventListener('scroll', function () {
+            var nav = document.getElementById('navbar');
+            var st = document.getElementById('scrolltop');
+            if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+            if (st) st.classList.toggle('show', window.scrollY > 400);
+        });
+
+        // Scroll reveal
+        var reveals = document.querySelectorAll('.reveal');
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(function (el) { io.observe(el); });
+
+        // FAQ accordion
+        var faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(function (item) {
+            var q = item.querySelector('.faq-question');
+            q.addEventListener('click', function () {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Send to WhatsApp function
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+
+            var name = document.getElementById('userName').value.trim();
+            var contact = document.getElementById('userContact').value.trim();
+            var projectType = document.getElementById('projectType').value;
+            var budget = document.getElementById('budget').value;
+            var message = document.getElementById('message').value.trim();
+
+            if (!name) {
+                alert("Please enter your name");
+                return;
+            }
+            if (!contact) {
+                alert("Please enter your phone or email");
+                return;
+            }
+
+            var submitBtn = document.getElementById('submitBtn');
+            var spinner = document.getElementById('loadingSpinner');
+            submitBtn.disabled = true;
+            spinner.style.display = 'inline-block';
+
+            var whatsappMessage = `*New Enquiry from Shadow Furniture Website*%0A%0A`;
+            whatsappMessage += `*Name:* ${name}%0A`;
+            whatsappMessage += `*Contact:* ${contact}%0A`;
+            whatsappMessage += `*Project Type:* ${projectType}%0A`;
+            whatsappMessage += `*Budget:* ${budget}%0A`;
+            whatsappMessage += `*Message:* ${message || "Not specified"}%0A%0A`;
+            whatsappMessage += `*Sent from:* Shadow Furniture Contact Form`;
+
+            var whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+            window.open(whatsappUrl, '_blank');
+
+            setTimeout(function () {
+                document.getElementById('cform').style.display = 'none';
+                document.getElementById('formOk').style.display = 'block';
+                submitBtn.disabled = false;
+                spinner.style.display = 'none';
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Furniture — Our Story</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --cream: #F5F0E8;
+            --cream2: #EDE7D9;
+            --cream3: #DDD5C5;
+            --forest: #1C3528;
+            --forest2: #2A4A3A;
+            --forest3: #3B6151;
+            --forestd: #0E2019;
+            --brass: #C9A84C;
+            --brass2: #DFBF6E;
+            --brass3: #EDD08A;
+            --muted: #6B6660;
+            --white: #fff;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1)
+        }
+
+        body {
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream2)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--forest3);
+            border-radius: 3px
+        }
+
+        /* Navigation - Same as Home Page */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 86px;
+            background: rgba(245, 240, 232, 0.94);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(28, 53, 40, 0.09);
+            transition: height 0.35s var(--ease), box-shadow 0.35s
+        }
+
+        nav.scrolled {
+            height: 68px;
+            box-shadow: 0 4px 32px rgba(28, 53, 40, 0.08)
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none
+        }
+
+        .logo-img {
+            height: 95px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 38px;
+            list-style: none
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.2s;
+            text-decoration: none
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--brass);
+            transition: width 0.3s var(--ease)
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--forest)
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%
+        }
+
+        .nav-cta {
+            padding: 11px 26px;
+            background: var(--forest);
+            color: var(--cream);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            transition: all 0.25s;
+            text-decoration: none
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--forest);
+            border-color: var(--forest)
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--forest);
+            transition: all 0.3s
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg)
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg)
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 86px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: var(--cream);
+            padding: 28px 6%;
+            flex-direction: column;
+            gap: 0;
+            border-bottom: 1px solid rgba(28, 53, 40, 0.1);
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s
+        }
+
+        .mobile-nav.open {
+            display: flex;
+            opacity: 1;
+            transform: none
+        }
+
+        .mobile-nav a {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--forest);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(28, 53, 40, 0.08);
+            text-decoration: none
+        }
+
+        .mobile-nav a:last-child {
+            border-bottom: none
+        }
+
+        .page-hero {
+            height: 70vh;
+            background: linear-gradient(rgba(28, 53, 40, 0.7), rgba(28, 53, 40, 0.7)), url('https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=1600&h=800&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--cream);
+            margin-top: 86px
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 5vw, 64px);
+            font-weight: 500;
+            margin-bottom: 20px
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            opacity: 0.9
+        }
+
+        .section {
+            padding: 100px 8%
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 3.5vw, 44px);
+            font-weight: 500;
+            color: var(--forest);
+            margin-bottom: 25px
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.9;
+            margin-bottom: 20px
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08)
+        }
+
+        .mission-section {
+            background: var(--forest);
+            color: var(--cream);
+            padding: 100px 8%
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px
+        }
+
+        .mission-card {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1)
+        }
+
+        .mission-card i {
+            font-size: 48px;
+            color: var(--brass);
+            margin-bottom: 20px
+        }
+
+        .mission-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 15px
+        }
+
+        .mission-card p {
+            font-size: 14px;
+            opacity: 0.7;
+            line-height: 1.7
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px
+        }
+
+        .team-card {
+            text-align: center
+        }
+
+        .team-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 20px
+        }
+
+        .team-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 5px
+        }
+
+        .team-card p {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .values {
+            background: var(--cream2);
+            padding: 100px 8%
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 30px
+        }
+
+        .value-item i {
+            font-size: 40px;
+            color: var(--brass);
+            margin-bottom: 20px
+        }
+
+        .value-item h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 10px
+        }
+
+        /* Footer - Same as Home Page */
+        footer {
+            background: var(--forestd);
+            padding: 72px 5% 32px
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1fr 1fr;
+            gap: 56px;
+            margin-bottom: 56px
+        }
+
+        .footer-logo img {
+            height: 130px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+            color: rgba(245, 240, 232, 0.5);
+            font-size: 13px;
+            line-height: 1.85;
+            margin: 18px 0 24px;
+            max-width: 270px
+        }
+
+        .social-links {
+            display: flex;
+            gap: 11px
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(245, 240, 232, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(245, 240, 232, 0.4);
+            font-size: 14px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none
+        }
+
+        .social-links a:hover {
+            border-color: var(--brass);
+            color: var(--brass)
+        }
+
+        .footer-col h4 {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 22px
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px
+        }
+
+        .footer-col a {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.45);
+            transition: color 0.2s;
+            text-decoration: none
+        }
+
+        .footer-col a:hover {
+            color: var(--cream)
+        }
+
+        .footer-col span {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.45)
+        }
+
+        .footer-bottom {
+            padding-top: 28px;
+            border-top: 1px solid rgba(245, 240, 232, 0.08);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: rgba(245, 240, 232, 0.28)
+        }
+
+        /* Scroll to Top Button */
+        #scrolltop {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 500;
+            width: 44px;
+            height: 44px;
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none
+        }
+
+        #scrolltop.show {
+            opacity: 1;
+            transform: none;
+            pointer-events: all
+        }
+
+        #scrolltop:hover {
+            background: var(--forest2)
+        }
+
+        /* Responsive */
+        @media(max-width:1100px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px
+            }
+
+            .mission-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:768px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            nav {
+                padding: 0 6%;
+                height: 70px
+            }
+
+            .mobile-nav {
+                top: 70px
+            }
+
+            .page-hero {
+                margin-top: 70px;
+                height: 50vh
+            }
+
+            .section {
+                padding: 60px 6%
+            }
+
+            .mission-section,
+            .values {
+                padding: 60px 6%
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .footer-logo img {
+                height: 40px;
+            }
+
+            #scrolltop {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR (Same as Home Page) -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">
+            <img src="Assets/Shadow-furniture.png" alt="Shadow Furniture" class="logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Start Project</a>
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </nav>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div>
+            <h1>Our Story</h1>
+            <p>Handcrafted in the shadows, finished for the light</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="section">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Where craftsmanship meets artistry</h2>
+                <p>Founded in Kanpur in 1995, Shadow Furniture emerged from a simple belief: furniture should outlive
+                    its owners. In a world of mass production, we chose the path less traveled — slow, deliberate, and
+                    deeply personal craftsmanship.</p>
+                <p>Every piece that leaves our workshop carries the signature of master artisans who have spent decades
+                    perfecting their craft. We work with solid hardwoods, natural finishes, and time-honored joinery
+                    techniques that have been passed down through generations.</p>
+                <p>What makes us different is what we leave out — excess ornamentation, trend-driven shapes, anything
+                    that distracts from honest form. Our work is quiet, but it stays with you.</p>
+            </div>
+            <div class="about-image"><img
+                    src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=500&fit=crop"
+                    alt="Workshop"></div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <h2 style="text-align:center;font-family:'Playfair Display',serif;font-size:clamp(32px,3.5vw,44px);">Our guiding
+            principles</h2>
+        <div class="mission-grid">
+            <div class="mission-card"><i class="fas fa-gem"></i>
+                <h3>Mission</h3>
+                <p>To craft furniture that feels honest in the hand and quietly luxurious in the room — pieces that
+                    become heirlooms.</p>
+            </div>
+            <div class="mission-card"><i class="fas fa-eye"></i>
+                <h3>Vision</h3>
+                <p>To become India's most respected bespoke furniture house — known for restraint, quality, and
+                    integrity.</p>
+            </div>
+            <div class="mission-card"><i class="fas fa-heart"></i>
+                <h3>Values</h3>
+                <p>Integrity, patience, excellence, and a deep respect for the materials and people we work with.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section">
+        <h2
+            style="text-align:center;font-family:'Playfair Display',serif;font-size:clamp(32px,3.5vw,44px);margin-bottom:50px;">
+            Meet our master artisans</h2>
+        <div class="team-grid">
+            <div class="team-card"><img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop"
+                    alt="Artisan">
+                <h4>Rajesh Kumar</h4>
+                <p>Master Woodworker, 25+ years</p>
+            </div>
+            <div class="team-card"><img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop"
+                    alt="Designer">
+                <h4>Priya Sharma</h4>
+                <p>Head of Design, 15+ years</p>
+            </div>
+            <div class="team-card"><img
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop"
+                    alt="Finisher">
+                <h4>Mohammad Ali</h4>
+                <p>Finish Specialist, 20+ years</p>
+            </div>
+            <div class="team-card"><img
+                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop"
+                    alt="Consultant">
+                <h4>Ananya Mehta</h4>
+                <p>Design Consultant</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <h2
+            style="text-align:center;font-family:'Playfair Display',serif;font-size:clamp(32px,3.5vw,44px);margin-bottom:50px;">
+            What drives us</h2>
+        <div class="values-grid">
+            <div class="value-item"><i class="fas fa-tree"></i>
+                <h4>Sustainability</h4>
+                <p>We source only certified hardwoods and use eco-friendly finishes.</p>
+            </div>
+            <div class="value-item"><i class="fas fa-hand-sparkles"></i>
+                <h4>Bespoke Process</h4>
+                <p>Every piece is designed around you and your space.</p>
+            </div>
+            <div class="value-item"><i class="fas fa-clock"></i>
+                <h4>Timeless Design</h4>
+                <p>We avoid trends, focusing on pieces that endure.</p>
+            </div>
+            <div class="value-item"><i class="fas fa-handshake"></i>
+                <h4>Lifetime Support</h4>
+                <p>Your furniture is cared for as long as you own it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Same as Home Page) -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <a href="index.html">
+                    <img src="Assets/ChatGPT_Image_Jun_12__2026__12_48_54_PM-removebg-preview.png" alt="Shadow Furniture">
+                </a>
+                <p>Premium bespoke furniture crafted with precision and passion in Kanpur, India.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="services.html">Custom Design</a></li>
+                    <li><a href="services.html">Home Furniture</a></li>
+                    <li><a href="services.html">Office Furniture</a></li>
+                    <li><a href="services.html">Restoration</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+917860346828"><i class="fas fa-phone"></i> +91 7860346828</a></li>
+                    <li><a href="mailto:digitalshoaib419@gmail.com"><i class="fas fa-envelope"></i>
+                            digitalshoaib419@gmail.com</a></li>
+                    <li><span><i class="fas fa-map-marker-alt"></i> Kanpur, UP, India</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Shadow Furniture. All Rights Reserved.</p>
+            <p>Crafted with intent · Designed in SHADOW DIGITAL</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            var m = document.getElementById('mobileNav');
+            var h = document.getElementById('ham');
+            if (m) m.classList.toggle('open');
+            if (h) h.classList.toggle('open');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                document.getElementById('mobileNav').classList.remove('open');
+                document.getElementById('ham').classList.remove('open');
+            });
+        });
+
+        // Navbar scroll effect & scroll to top button
+        window.addEventListener('scroll', function () {
+            const nav = document.getElementById('navbar');
+            const st = document.getElementById('scrolltop');
+            if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+            if (st) st.classList.toggle('show', window.scrollY > 300);
+        });
+    </script>
+</body>
+
+</html>

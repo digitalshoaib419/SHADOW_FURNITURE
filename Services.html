@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Furniture — Our Services</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --cream: #F5F0E8;
+            --cream2: #EDE7D9;
+            --cream3: #DDD5C5;
+            --forest: #1C3528;
+            --forest2: #2A4A3A;
+            --forest3: #3B6151;
+            --forestd: #0E2019;
+            --brass: #C9A84C;
+            --brass2: #DFBF6E;
+            --brass3: #EDD08A;
+            --muted: #6B6660;
+            --white: #fff;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1)
+        }
+
+        body {
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream2)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--forest3);
+            border-radius: 3px
+        }
+
+        /* Navigation - Same as Home Page */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 86px;
+            background: rgba(245, 240, 232, 0.94);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(28, 53, 40, 0.09);
+            transition: height 0.35s var(--ease), box-shadow 0.35s
+        }
+
+        nav.scrolled {
+            height: 68px;
+            box-shadow: 0 4px 32px rgba(28, 53, 40, 0.08)
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none
+        }
+
+        .logo-img {
+            height: 95px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 38px;
+            list-style: none
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.2s;
+            text-decoration: none
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--brass);
+            transition: width 0.3s var(--ease)
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--forest)
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%
+        }
+
+        .nav-cta {
+            padding: 11px 26px;
+            background: var(--forest);
+            color: var(--cream);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            transition: all 0.25s;
+            text-decoration: none
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--forest);
+            border-color: var(--forest)
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--forest);
+            transition: all 0.3s
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg)
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg)
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 86px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: var(--cream);
+            padding: 28px 6%;
+            flex-direction: column;
+            gap: 0;
+            border-bottom: 1px solid rgba(28, 53, 40, 0.1);
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s
+        }
+
+        .mobile-nav.open {
+            display: flex;
+            opacity: 1;
+            transform: none
+        }
+
+        .mobile-nav a {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--forest);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(28, 53, 40, 0.08);
+            text-decoration: none
+        }
+
+        .mobile-nav a:last-child {
+            border-bottom: none
+        }
+
+        .page-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(28, 53, 40, 0.6), rgba(28, 53, 40, 0.6)), url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&h=700&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--cream);
+            margin-top: 86px
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 5vw, 64px);
+            font-weight: 500;
+            margin-bottom: 20px
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            opacity: 0.9
+        }
+
+        .services-grid {
+            padding: 100px 8%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 2px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            transition: 0.3s
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12)
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--forest);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px
+        }
+
+        .service-icon i {
+            font-size: 32px;
+            color: var(--brass)
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--forest);
+            margin-bottom: 15px
+        }
+
+        .service-card p {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 20px
+        }
+
+        .service-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--brass);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05)
+        }
+
+        .cta-section {
+            background: var(--forest);
+            padding: 80px 8%;
+            text-align: center;
+            color: var(--cream)
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 3.5vw, 42px);
+            margin-bottom: 20px
+        }
+
+        .cta-section .btn-primary {
+            padding: 15px 35px;
+            background: var(--brass);
+            color: var(--forest);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s
+        }
+
+        .cta-section .btn-primary:hover {
+            background: var(--brass-light);
+            transform: translateY(-2px)
+        }
+
+        /* Footer - Same as Home Page */
+        footer {
+            background: var(--forestd);
+            padding: 72px 5% 32px
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1fr 1fr;
+            gap: 56px;
+            margin-bottom: 56px
+        }
+
+        .footer-logo img {
+            height: 130px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+            color: rgba(245, 240, 232, 0.5);
+            font-size: 13px;
+            line-height: 1.85;
+            margin: 18px 0 24px;
+            max-width: 270px
+        }
+
+        .social-links {
+            display: flex;
+            gap: 11px
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(245, 240, 232, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(245, 240, 232, 0.4);
+            font-size: 14px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none
+        }
+
+        .social-links a:hover {
+            border-color: var(--brass);
+            color: var(--brass)
+        }
+
+        .footer-col h4 {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 22px
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px
+        }
+
+        .footer-col a {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.45);
+            transition: color 0.2s;
+            text-decoration: none
+        }
+
+        .footer-col a:hover {
+            color: var(--cream)
+        }
+
+        .footer-col span {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.45)
+        }
+
+        .footer-bottom {
+            padding-top: 28px;
+            border-top: 1px solid rgba(245, 240, 232, 0.08);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: rgba(245, 240, 232, 0.28)
+        }
+
+        /* Scroll to Top Button */
+        #scrolltop {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 500;
+            width: 44px;
+            height: 44px;
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none
+        }
+
+        #scrolltop.show {
+            opacity: 1;
+            transform: none;
+            pointer-events: all
+        }
+
+        #scrolltop:hover {
+            background: var(--forest2)
+        }
+
+        /* Responsive */
+        @media(max-width:1100px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:768px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            nav {
+                padding: 0 6%;
+                height: 70px
+            }
+
+            .mobile-nav {
+                top: 70px
+            }
+
+            .page-hero {
+                margin-top: 70px;
+                height: 40vh
+            }
+
+            .services-grid {
+                padding: 60px 6%;
+                grid-template-columns: 1fr
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .footer-logo img {
+                height: 40px;
+            }
+
+            #scrolltop {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR (Same as Home Page) -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">
+            <img src="Assets/Shadow-furniture.png" alt="Shadow Furniture" class="logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Start Project</a>
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </nav>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <section class="page-hero">
+        <div>
+            <h1>Our Services</h1>
+            <p>End-to-end furniture solutions tailored to you</p>
+        </div>
+    </section>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+            <h3>Custom Furniture Design</h3>
+            <p>From initial sketch to final finish — pieces that exist nowhere else. Tailored to your space, your life,
+                your light.</p>
+            <div class="service-price">Starting from ₹50,000</div>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-home"></i></div>
+            <h3>Home Furniture</h3>
+            <p>Beds, sofas, dining tables, consoles — each piece made with the patience that residential living
+                deserves.</p>
+            <div class="service-price">Starting from ₹35,000</div>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-building"></i></div>
+            <h3>Office Furniture</h3>
+            <p>Workspaces that signal intention. Desks, meeting tables, seating and joinery that make your environment
+                feel considered.</p>
+            <div class="service-price">Starting from ₹40,000</div>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-couch"></i></div>
+            <h3>Interior Solutions</h3>
+            <p>Turnkey interior programmes — we coordinate material selections, finishes and furniture across entire
+                projects.</p>
+            <div class="service-price">Custom Quote</div>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-tools"></i></div>
+            <h3>Restoration & Repair</h3>
+            <p>Some pieces deserve a second life. We restore inherited and antique furniture without erasing their
+                history.</p>
+            <div class="service-price">Starting from ₹15,000</div>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-truck"></i></div>
+            <h3>Installation Service</h3>
+            <p>Delivery and precise installation with no damage, no shortcuts. We leave the space cleaner than we found
+                it.</p>
+            <div class="service-price">Free with purchase</div>
+        </div>
+    </div>
+
+    <section class="cta-section">
+        <h2>Ready to bring your vision to life?</h2>
+        <p>Let's discuss your project — no obligation, just great conversation.</p><br>
+        <a href="contact.html" class="btn-primary">Book Free Consultation <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <!-- FOOTER (Same as Home Page) -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <a href="index.html">
+                    <img src="Assets/ChatGPT_Image_Jun_12__2026__12_48_54_PM-removebg-preview.png" alt="Shadow Furniture">
+                </a>
+                <p>Premium bespoke furniture crafted with precision and passion in Kanpur, India.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="services.html">Custom Design</a></li>
+                    <li><a href="services.html">Home Furniture</a></li>
+                    <li><a href="services.html">Office Furniture</a></li>
+                    <li><a href="services.html">Restoration</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+917860346828"><i class="fas fa-phone"></i> +91 7860346828</a></li>
+                    <li><a href="mailto:digitalshoaib419@gmail.com"><i class="fas fa-envelope"></i>
+                            digitalshoaib419@gmail.com</a></li>
+                    <li><span><i class="fas fa-map-marker-alt"></i> Kanpur, UP, India</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Shadow Furniture. All Rights Reserved.</p>
+            <p>Crafted with intent · Designed in SHADOW DIGITAL</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            var m = document.getElementById('mobileNav');
+            var h = document.getElementById('ham');
+            if (m) m.classList.toggle('open');
+            if (h) h.classList.toggle('open');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                document.getElementById('mobileNav').classList.remove('open');
+                document.getElementById('ham').classList.remove('open');
+            });
+        });
+
+        // Navbar scroll effect & scroll to top button
+        window.addEventListener('scroll', function () {
+            const nav = document.getElementById('navbar');
+            const st = document.getElementById('scrolltop');
+            if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+            if (st) st.classList.toggle('show', window.scrollY > 300);
+        });
+    </script>
+</body>
+
+</html>
