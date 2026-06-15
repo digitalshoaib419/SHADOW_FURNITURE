@@ -592,13 +592,13 @@
 
         @media (max-width: 786px) {
             .hero-stats-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 80px;
-            width: 100%;
-            background: #0E2019;
-        }
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 80px;
+                width: 100%;
+                background: #0E2019;
+            }
 
         }
 
@@ -1679,9 +1679,18 @@
             <div class="hero-eyebrow">EST. 1995 — Kanpur, India</div>
             <h1>Pieces designed to<br>age slowly,<br><em>beautifully.</em></h1>
             <p>Bespoke furniture crafted by master artisans. Built to outlast generations.</p>
-            <div class="hero-btns"><a href="portfolio.html" class="btn-gold">Explore Collection <i
-                        class="fas fa-arrow-right"></i></a><a href="contact.html" class="btn-ghost">Book
-                    Consultation</a></div>
+            <!-- <div class="hero-btns"><a href="portfolio.html" class="btn-gold">Explore Collection <i
+                        class="fas fa-arrow-right"></i></a><portfolio.html class=""></portfolio><a href="contact.html" class="btn-ghost">Book
+                    Consultation</a></div> -->
+            <div class="hero-btns">
+                <a href="portfolio.html" class="btn-gold">
+                    Explore Collection <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="contact.html" class="btn-ghost">
+                    Book Consultation
+                </a>
+            </div>
         </div>
         <div class="hero-img-wrap">
             <!-- Image ki jagah VIDEO - Fully Responsive -->
@@ -1694,19 +1703,19 @@
         </div>
     </section>
     <div class="hero-stats-bar">
-            <div class="hstat">
-                <div class="hstat-num">200+</div>
-                <div class="hstat-lbl">Projects</div>
-            </div>
-            <div class="hstat">
-                <div class="hstat-num">20+</div>
-                <div class="hstat-lbl">Years</div>
-            </div>
-            <div class="hstat">
-                <div class="hstat-num">100%</div>
-                <div class="hstat-lbl">Bespoke</div>
-            </div>
+        <div class="hstat">
+            <div class="hstat-num">200+</div>
+            <div class="hstat-lbl">Projects</div>
         </div>
+        <div class="hstat">
+            <div class="hstat-num">20+</div>
+            <div class="hstat-lbl">Years</div>
+        </div>
+        <div class="hstat">
+            <div class="hstat-num">100%</div>
+            <div class="hstat-lbl">Bespoke</div>
+        </div>
+    </div>
 
     <div class="marquee-bar">
         <div class="mq-track"><span>Custom Furniture Design</span><i class="fas fa-circle"></i><span>Bespoke
@@ -1923,7 +1932,7 @@
                 </div>
             </div>
             <div>
-                <form class="form" id="cform" onsubmit="submitForm(event)">
+                <!-- <form class="form" id="cform" onsubmit="submitForm(event)">
                     <div class="frow">
                         <div class="fg"><label>Your Name</label><input type="text" placeholder="Name" required>
                         </div>
@@ -1945,7 +1954,54 @@
                 <div class="form-ok" id="formOk"><i class="fas fa-check-circle"></i> Message sent. We'll be in touch
                     within 24 hours.</div>
             </div>
-        </div>
+        </div> -->
+
+                <div>
+                    <form class="form" id="cform" onsubmit="sendToWhatsApp(event)">
+                        <div class="frow">
+                            <div class="fg"><label>Your Name</label><input type="text" id="userName" placeholder="Name"
+                                    required>
+                            </div>
+                            <div class="fg"><label>Phone / Email</label><input type="text" id="userContact"
+                                    placeholder="Phone or Email" required></div>
+                        </div>
+                        <div class="fg">
+                            <label>Type of Project</label>
+                            <select id="projectType">
+                                <option>Select a service...</option>
+                                <option>Custom Furniture Design</option>
+                                <option>Home Furniture</option>
+                                <option>Office Furniture</option>
+                                <option>Interior Furniture Solutions</option>
+                                <option>Furniture Repair & Restoration</option>
+                                <option>Furniture Installation</option>
+                            </select>
+                        </div>
+                        <div class="fg">
+                            <label>Budget Range (₹)</label>
+                            <select id="budget">
+                                <option>Select a range...</option>
+                                <option>Under ₹50,000</option>
+                                <option>₹50,000 – ₹1,50,000</option>
+                                <option>₹1,50,000 – ₹5,00,000</option>
+                                <option>₹5,00,000 – ₹10,00,000</option>
+                                <option>₹10,00,000+</option>
+                            </select>
+                        </div>
+                        <div class="fg">
+                            <label>Tell Us About Your Space</label>
+                            <textarea id="message" placeholder="Text Hear"></textarea>
+                        </div>
+                        <button type="submit" class="btn-forest" id="submitBtn">
+                            Send Message <i class="fas fa-arrow-right"></i>
+                            <span class="loading-spinner" id="loadingSpinner"></span>
+                        </button>
+                    </form>
+                    <div class="form-ok" id="formOk"><i class="fas fa-check-circle" style="margin-right:8px;"></i>
+                        Message
+                        sent! We'll be in touch within 24 hours.</div>
+                </div>
+            </div>
     </section>
 
     <footer>
@@ -1995,7 +2051,7 @@
 
     <button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
 
-    <script>
+    <!-- <script>
         // Preloader - hide after 1.5 seconds
         window.addEventListener('load', function () {
             setTimeout(function () {
@@ -2044,7 +2100,97 @@
             e.preventDefault();
             document.getElementById('cform').style.display = 'none';
             document.getElementById('formOk').style.display = 'block';
+        } -->
+
+    <script>
+        // Preloader - hide after 1.5 seconds
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        function toggleMenu() {
+            var m = document.getElementById('mobileNav');
+            var h = document.getElementById('ham');
+            m.classList.toggle('open');
+            h.classList.toggle('open');
         }
+
+        function closeMenu() {
+            document.getElementById('mobileNav').classList.remove('open');
+            document.getElementById('ham').classList.remove('open');
+        }
+
+        window.addEventListener('scroll', function () {
+            var nav = document.getElementById('navbar');
+            var st = document.getElementById('scrolltop');
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+            st.classList.toggle('show', window.scrollY > 400);
+
+            var sections = ['home', 'about', 'services', 'portfolio', 'testimonials', 'contact'];
+            var cur = 'home';
+
+            sections.forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el && window.scrollY >= el.offsetTop - 100) cur = id;
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(function (a) {
+                a.classList.remove('active');
+                if (
+                    a.getAttribute('href') === cur + '.html' ||
+                    (cur === 'home' && a.getAttribute('href') === 'index.html')
+                ) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        var reveals = document.querySelectorAll('.reveal,.reveal-left');
+
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.12 });
+
+        reveals.forEach(function (el) {
+            io.observe(el);
+        });
+
+        // WhatsApp Form Submit
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value;
+            const contact = document.getElementById('userContact').value;
+            const projectType = document.getElementById('projectType').value;
+            const budget = document.getElementById('budget').value;
+            const message = document.getElementById('message').value;
+
+            const text =
+                `*New Furniture Inquiry*
+
+👤 Name: ${name}
+📞 Contact: ${contact}
+🪑 Project Type: ${projectType}
+💰 Budget: ${budget}
+
+📝 Message:
+${message}`;
+
+            const phoneNumber = "917860346828";
+
+            window.open(
+                `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`,
+                '_blank'
+            );
+
+            document.getElementById('cform').style.display = 'none';
+            document.getElementById('formOk').style.display = 'block';
+        }
+    </script>
     </script>
 </body>
 
